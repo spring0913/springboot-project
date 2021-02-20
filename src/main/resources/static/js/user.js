@@ -3,9 +3,11 @@ let index = {
 		$("#btn-save").on("click", ()=>{
 			this.save();
 		});
+		/*
 		$("#btn-login").on("click", ()=>{
 			this.login();
 		});
+		*/
 	},
 	save: function(){
 		let data = {
@@ -19,7 +21,7 @@ let index = {
 		// ajax 통신을 이용해서 3개의 데이터를 json 으로 변경하여 insert 요청
 		$.ajax({
 			type: "POST",
-			url: "/api/user",
+			url: "/auth/joinProc",
 			data: JSON.stringify(data), // http body 데이터
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"  
@@ -31,6 +33,7 @@ let index = {
 		}); 
 	},
 	
+	/*
 	login: function(){
 		let data = {
 			username: $("#username").val(),
@@ -54,6 +57,7 @@ let index = {
 			alert("로그인 실패");
 		}); 
 	}
+	*/
 }
 
 index.init();
