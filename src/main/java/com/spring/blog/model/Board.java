@@ -38,8 +38,7 @@ public class Board {
 	@Lob // 대용량 데이터
 	private String content;
 	
-	@ColumnDefault("0")
-	private String count;
+	private int count;
 	
 	@ManyToOne // Board = Many, User = One
 	@JoinColumn(name="userId")
