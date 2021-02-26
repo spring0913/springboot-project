@@ -23,7 +23,7 @@ public class BoardApiController {
 	private BoardService boardService;
 	
 	@PostMapping("/api/board")
-	public ResponseDto<Integer> save(@RequestBody Board board, @org.springframework.security.core.annotation.AuthenticationPrincipal PrincipalDetail principal) {
+	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
 		boardService.write(board, principal.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
