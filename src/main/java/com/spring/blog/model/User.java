@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB 의 넘버링 전략을 따라감
 	private int id;
 	
-	@Column(nullable = false, length = 30, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	private String username;
 
 	@Column(nullable = false, length = 100) // 비밀번호를 해쉬값으로 저장
@@ -43,6 +43,8 @@ public class User {
 	//@ColumnDefault("user")
 	@Enumerated(EnumType.STRING)
 	private RoleType role;
+	
+	private String oauth;
 	
 	@CreationTimestamp // 시간이 자동으로 입력됨
 	private Timestamp createDate;
