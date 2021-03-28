@@ -3,11 +3,10 @@ let index = {
 		$("#btn-save").on("click", ()=>{
 			this.save();
 		});
-		/*
-		$("#btn-login").on("click", ()=>{
-			this.login();
+		
+		$("#btn-delete").on("click", ()=>{
+			this.deleteById();
 		});
-		*/
 	},
 	save: function(){
 		let data = {
@@ -29,32 +28,19 @@ let index = {
 			alert(JSON.stringify(error));
 		}); 
 	},
-	
-	/*
-	login: function(){
-		let data = {
-			username: $("#username").val(),
-			password: $("#password").val()
-		};
-		
-		//console.log(data);
-		
-		// ajax 통신을 이용해서 3개의 데이터를 json 으로 변경하여 insert 요청
+	deleteById: function(){
+		var id = $("#id").text();
 		$.ajax({
-			type: "POST",
-			url: "/api/user/login",
-			data: JSON.stringify(data), // http body 데이터
-			contentType: "application/json; charset=utf-8",
+			type: "DELETE",
+			url: "/api/board/"+id,
 			dataType: "json"  
 		}).done(function(resp){
-			alert("로그인 성공");
+			alert("삭제가 완료되었습니다.");
 			location.href = "/";
 		}).fail(function(error){
-			//alert(JSON.stringify(error));
-			alert("로그인 실패");
+			alert(JSON.stringify(error));
 		}); 
 	}
-	*/
 }
 
 index.init();
