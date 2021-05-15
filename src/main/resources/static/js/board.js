@@ -52,8 +52,6 @@ let index = {
 			title: $("#title").val(),
 			content: $("#content").val(),
 		};
-		console.log(id);
-		console.log(data);
 		$.ajax({
 			type: "PUT",
 			url: "/api/board/"+id,

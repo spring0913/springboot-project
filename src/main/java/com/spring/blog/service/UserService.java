@@ -43,10 +43,15 @@ public class UserService {
 		return -1;
 	}
 	
-	/*
-	@Transactional(readOnly = true) // select 할 때 트랜잭션 시작, service 종료 시에 트랜잭션 종료(정합성)
-	public User login(User user) {
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+	@Transactional
+	public void userUpdate(User user) {
+		// 영속성 컨텍스트 User 오브젝트를 영속화시킨 후 영속화된 User 오브젝트를 수정
+		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
+			return new IllegalArgumentException("회원 찾기 실패");
+		});
+		String rawPassword = user.getPassword();
+		String encPassword = encoder.encode(rawPassword);
+		persistance.setPassword(encPassword);
+		persistance.setEmail(user.getEmail());
 	}
-	*/
 }

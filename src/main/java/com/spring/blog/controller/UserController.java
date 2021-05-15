@@ -51,6 +51,11 @@ public class UserController {
 		return "user/loginForm";
 	}
 	
+	@GetMapping("/user/updateForm")
+	public String updateForm() {
+		return "user/updateForm";
+	}
+	
 	@GetMapping("/auth/kakao/callback")
 	public String kakaoCallback(String code){ // Data 를 리턴해주는 컨트롤러 함수
 		// POST 방식으로 key=value 데이터를 카카오로 요청
