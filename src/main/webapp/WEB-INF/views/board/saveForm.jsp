@@ -2,8 +2,12 @@
 
 <%@ include file="../layout/header.jsp"%>
 
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+
 <div class="container">
 	<form>
+		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 		<div class="form-group">
 			<label for="title">Title</label> 
 			<input type="text" class="form-control" placeholder="Enter title" id="title">

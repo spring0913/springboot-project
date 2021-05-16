@@ -2,6 +2,9 @@
 
 <%@ include file="../layout/header.jsp"%>
 
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+
 <div class="container">
 	<div>
 		글 번호 : <span id="id"><i>${board.id} </i></span>
@@ -18,7 +21,8 @@
   	<hr/>
   	<button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
   	<c:if test="${board.user.id == principal.user.id}">
-		<a href="/board/${board.id}/updateForm" class="btn btn-warning">수정</a>
+  	<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+  		<a href="/board/${board.id}/updateForm" class="btn btn-warning">수정</a>
 		<button id="btn-delete" class="btn btn-danger">삭제</button>
 	</c:if>
 	<br> <br>

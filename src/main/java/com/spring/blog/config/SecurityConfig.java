@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.spring.blog.config.auth.PrincipalDetailService;
 
@@ -41,8 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.csrf().disable() // csrf 토큰 비활성화
-			.authorizeRequests()
+			.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			.and()
+				.authorizeRequests()
 				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**")
 				.permitAll()
 				.anyRequest()
@@ -51,6 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.formLogin()
 				.loginPage("/auth/loginForm")
 				.loginProcessingUrl("/auth/loginProc")
-				.defaultSuccessUrl("/"); // 스프링 시큐리티가 해당 주소로 요청하는 로그인을 가로채서 대신 로그인
+				.defaultSuccessUrl("/") // 스프링 시큐리티가 해당 주소로 요청하는 로그인을 가로채서 대신 로그인
+			.and()
+				.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 }

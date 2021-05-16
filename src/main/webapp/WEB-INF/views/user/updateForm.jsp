@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
+
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+
 <div class="container">
 	<form>
+		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 		<input type="hidden" id="id" value="${principal.user.id}" />
 		<div class="form-group">
 			<label for="username">Username</label> 
